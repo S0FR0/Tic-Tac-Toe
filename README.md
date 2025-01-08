@@ -1,1 +1,1 @@
-# Tic-Tac-Toe
+Create a tic tac toe application using object factories and closures.
