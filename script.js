@@ -1,5 +1,4 @@
 const board = [];
-const emptyBoard = [];
 
 function createPlayer(name, symbol){
     const playerName = name;
@@ -9,24 +8,27 @@ function createPlayer(name, symbol){
 
 const player1 = createPlayer('Jorje', 'X');
 
-const player2 = createPlayer('Zara', 'O')
+const player2 = createPlayer('Zara', 'O');
 
-function createBoard() {
-    const container = document.querySelector('.container')
-    for (let i = 0; i < 9; i++){
-        const button = document.createElement('button');
-        button.setAttribute('class', 'square');
-        button.setAttribute('id', `${i}`);
-        board.push(button);
-        container.appendChild(button);
+function gameLogic() {
+    function createBoard() {
+        const container = document.querySelector('.container')
+        for (let i = 0; i < 9; i++){
+            const button = document.createElement('button');
+            button.setAttribute('class', 'square');
+            button.setAttribute('id', `${i}`);
+            board.push(button);
+            container.appendChild(button);
+        }
     }
-}
 
-function clearBoard() {
-    for(let i = 0; i< board.length; i++){
-        board[i].setAttribute('class', 'square')
-        board[i].textContent = '';
+    function clearBoard() {
+        for(let i = 0; i< board.length; i++){
+            board[i].setAttribute('class', 'square')
+            board[i].textContent = '';
+        }
     }
+    return {createBoard, clearBoard};
 }
 
 function checkStatus(){
@@ -53,9 +55,7 @@ function checkStatus(){
     return {winStatus}
     }
 
-createBoard();
-
-
+gameLogic().createBoard();
 
 let counter = 0;
 
@@ -74,14 +74,14 @@ for(let i = 0; i < board.length; i++){
             counter++;
             if(checkStatus().winStatus === 1)
                 {   
-                    clearBoard();
+                    gameLogic().clearBoard();
                     winnText.innerText = 'X won!';
                     dialog.showModal();
                     closebtn.addEventListener('click', () => dialog.close())
                     counter = 0;
                  }
             else if(counter === 9){
-                clearBoard();
+                    gameLogic().clearBoard();
                     winnText.innerText = 'Tie';
                     dialog.showModal();
                     closebtn.addEventListener('click', () => dialog.close())
@@ -94,7 +94,7 @@ for(let i = 0; i < board.length; i++){
             counter++;
             if(checkStatus().winStatus === -1)
                 {   
-                    clearBoard();
+                    gameLogic().clearBoard();
                     winnText.innerText = 'O won!';
                     dialog.showModal();
                     closebtn.addEventListener('click', () => dialog.close())
