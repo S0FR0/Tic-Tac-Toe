@@ -1,0 +1,19 @@
+body{
+    --board-width: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    height: var(--board-width);
+    width: var(--board-width);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square{
+    height: calc(var(--board-width) / 3);
+    width: calc(var(--board-width) / 3);
+}
